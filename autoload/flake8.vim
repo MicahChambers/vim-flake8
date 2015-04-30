@@ -10,6 +10,14 @@ set cpo&vim
 
 "" ** external ** {{{
 
+function! flake8#Flake8ForceQuickFix()
+    let l:tmpvar = g:flake8_show_quickfix
+    let g:flake8_show_quickfix = 1
+    call s:Flake8()
+    call s:Warnings()
+    let g:flake8_show_quickfix = l:tmpvar
+endfunction
+
 function! flake8#Flake8()
     call s:Flake8()
     call s:Warnings()
@@ -24,7 +32,7 @@ endfunction
 
 "" ** internal ** {{{
 
-"" warnings 
+"" warnings
 
 let s:displayed_warnings = 0
 function s:Warnings()
